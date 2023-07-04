@@ -1,0 +1,16 @@
+<div class="items-container">
+  <div class="countries-item"
+       *ngFor="let item of nationalizeData; let i = index; trackBy: nationalizeTrack">
+    <div class="countries-item__title">
+      {{item.name}}
+    </div>
+    <ul class="country-list">
+      <ng-container *ngFor="let country of item.country; let i = index; trackBy: countryTrack">
+        <li class="country-list__country">
+          <span>{{country.country_id | countryName}}</span>
+          <span>{{country.probability | probabilityPercentage}}</span>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
