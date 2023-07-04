@@ -1,4 +1,5 @@
-<div class="items-container">
+<div class="items-container"
+     *ngIf="isDataFetchSuccess">
   <div class="countries-item"
        *ngFor="let item of nationalizeData; let i = index; trackBy: nationalizeTrack">
     <div class="countries-item__title">
@@ -13,4 +14,9 @@
       </ng-container>
     </ul>
   </div>
+</div>
+<div class="error-container"
+     *ngIf="!isDataFetchSuccess">
+  <h1>An error has occurred</h1>
+  <p class="error-container__error">{{errorMessage}}</p>
 </div>

@@ -5,16 +5,16 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 24px;
-  padding: 24px 0 64px;
+  padding-bottom: 64px;
 }
 
 .countries-item {
   display: flex;
   flex-direction: column;
   padding: 24px;
-  width: calc(100% / 4 - 48px);
+  width: calc(25% - 48px);
   border-radius: 16px;
-  box-shadow: 1px 1px 3px 4px #ccc;
+  box-shadow: 1px 1px 3px 4px $color-grey-2;
   background-color: white;
 
   &__title {
@@ -23,6 +23,18 @@
     padding-bottom: 16px;
     border-bottom: 1px solid $color-blue-2;
     color: $color-blue-2;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .countries-item {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width: 600px) {
+  .countries-item {
+    width: 35%
   }
 }
 
@@ -39,14 +51,11 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .countries-item {
-    width: 70%;
-  }
-}
+.error-container {
+  color: white;
 
-@media only screen and (max-width: 800px) and (min-width: 600px) {
-  .countries-item {
-    width: 35%
+  &__error {
+    color: red;
+    text-align: center;
   }
 }
