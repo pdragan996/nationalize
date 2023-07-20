@@ -1,18 +1,25 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { jsonServerUrl } from '../shared/app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetNamesService {
-  serviceName = 'getNames';
+  names: string[] = [];
 
-  constructor(private _http: HttpClient) {}
+  constructor() {}
 
-  getNames(): Observable<string[]> {
-    const url = `${jsonServerUrl}/${this.serviceName}`
-    return this._http.get<string[]>(url);
+  addNameToList(name: string): void {
+    this.names.push(name);
+  }
+
+  removeFromList(name: string): void {
+    const index = this.names.indexOf(name);
+    if (index !== -1) {
+      this.names.splice(index, 1);
+    }
+  }
+
+  getNames(): string[] {
+    return this.names;
   }
 }

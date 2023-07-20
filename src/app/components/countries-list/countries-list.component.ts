@@ -23,22 +23,17 @@ export class CountriesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const nextFunction = (response: NationalizeDataModel[]) => {
-      this.nationalizeData = response;
-      this.isDataFetchSuccess = true;
-    };
+    this._getNamesService.addNameToList('Dragan');
+    const names = this._getNamesService.getNames();
 
-    const errorFunction = err => {
-      this.isDataFetchSuccess = false;
-      this.errorMessage = err?.error?.error ?? err?.error;
-    };
-
-    this.sub = this._getNamesService.getNames().pipe(
-      switchMap((names: string[]) => this._getNationalitiesService.getNationalities(names))
-    ).subscribe({
-      next: nextFunction,
-      error: errorFunction
-    });
+    this.sub = this._getNationalitiesService.getNationalities(names)
+      .subscribe((response: NationalizeDataModel[]) => {
+        this.nationalizeData = response;
+        this.isDataFetchSuccess = true;
+      }, err => {
+        this.isDataFetchSuccess = false;
+        this.errorMessage = err?.error?.error ?? err?.error;
+      })
   }
 
   nationalizeTrack(index: number, item: NationalizeDataModel): number {
